@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "LFM 中文汉化",
+  "description": "Low Fuel Motorsport 中文汉化插件，基于站点 Nuxt 语言包词条补丁。",
+  "version": "0.1.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://lowfuelmotorsport.com/*",
+        "https://www.lowfuelmotorsport.com/*"
+      ],
+      "js": [
+        "translations/common.js",
+        "translations/header-top.js",
+        "translations/home.js",
+        "translations/faq.js",
+        "translations/lfmplus.js",
+        "translations/lfmapp.js",
+        "translations/racing-official.js",
+        "translations/series.js",
+        "translations/statistics.js",
+        "translations/seasonsraces.js",
+        "translations/achievements.js",
+        "translations/penalties.js",
+        "translations/myaccount-myraces.js",
+        "translations/ac-app-card.js",
+        "translations/lfm-support-widget.js",
+        "translations/footer.js",
+        "translations/track.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}
