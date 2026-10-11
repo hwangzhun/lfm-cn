@@ -156,28 +156,6 @@
     "Achieve 1000 Top 10s!": "取得 1000 次前十名！"
   });
 
-  Object.assign(window.LFM_CN_TRANSLATIONS.partial, {
-
-  });
-
   window.LFM_CN_TRANSLATIONS.selectorScoped = window.LFM_CN_TRANSLATIONS.selectorScoped || [];
 
-  window.LFM_CN_TRANSLATIONS.selectorScoped.push({
-    selectors: ["#"],
-    exact: {
-
-    },
-    partial: {
-
-    },
-    patterns: [
-
-    ]
-  });
-
-
-
-  window.LFM_CN_TRANSLATIONS.patterns.push(
-
-  );
 })();

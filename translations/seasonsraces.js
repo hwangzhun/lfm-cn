@@ -18,14 +18,14 @@
 
     // Race Detail 比赛详情
     "Race Detail": "比赛详情",
-    "COPY LINK": "复制链接",
-    "Split": "分组",
+    "SHARE RESULT": "分享结果",
+
     "information": "信息",
     "Qualifying Results": "排位赛结果",
     "Race Results": "正赛结果",
     "Entrylist": "参赛名单",
     "Additional Charts": "附加图表",
-    "OVERALL": "总排名",
+
     "Pos.": "名次",
     "Origin": "国籍",
     "Team": "车队",
@@ -81,12 +81,7 @@
     // 参赛名单
     "Car ELO": "车辆 ELO",
         "Livery": "涂装",
-        "Drivers": "车搜",
-
-
-  });
-
-  Object.assign(window.LFM_CN_TRANSLATIONS.partial, {
+        "Drivers": "车手",
 
   });
 
@@ -149,6 +144,8 @@
   };
 
   window.LFM_CN_TRANSLATIONS.patterns.push(
+    [/^Split (\d+)$/i, "分组 $1"],
+    [/^(\d+) Laps?$/i, "$1 圈"],
     [
       /^(MON|TUE|WED|THU|FRI|SAT|SUN),\s*(\d{1,2})\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+(\d{4}),\s*(\d{1,2}:\d{2})$/i,
       function (_, day, date, month, year, time) {

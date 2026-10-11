@@ -11,11 +11,6 @@
     // banner
     "WORLDS LEADING INDEPENDENT": "全球领先的独立",
     "COMPETITIVE SIMRACING PLATFORM": "竞技模拟赛车平台",
-    "GO RACING!": "开始比赛！",
-    "TODAY NEW USERS": "今日新增用户",
-    "USERS": "用户",
-    "CURRENTLY RACING": "当前在赛",
-    "TOTAL LAPS DRIVEN": "总驾驶圈数",
 
     // 热门赛事
     "WHATS HOT": "热门赛事",

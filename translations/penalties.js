@@ -16,31 +16,9 @@
     "Reportdate:": "报告日期：",
     "Session ID:": "比赛ID：",
     "Report ID:": "报告ID：",
-    "STEWARD DECISION:": "管理员决定：",
-  });
-
-  Object.assign(window.LFM_CN_TRANSLATIONS.partial, {
-
+    "STEWARD DECISION:": "赛事干事判罚：",
   });
 
   window.LFM_CN_TRANSLATIONS.selectorScoped = window.LFM_CN_TRANSLATIONS.selectorScoped || [];
 
-  window.LFM_CN_TRANSLATIONS.selectorScoped.push({
-    selectors: ["#"],
-    exact: {
-
-    },
-    partial: {
-
-    },
-    patterns: [
-
-    ]
-  });
-
-
-
-  window.LFM_CN_TRANSLATIONS.patterns.push(
-
-  );
 })();

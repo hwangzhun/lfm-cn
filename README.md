@@ -1,37 +1,31 @@
-# LFM 中文汉化插件
+# LFM 中文汉化扩展
 
-这是一个 Chrome Manifest V3 已解压扩展，用于汉化 `lowfuelmotorsport.com`。
+Chrome Manifest V3 扩展，将 `lowfuelmotorsport.com` 和 `www.lowfuelmotorsport.com` 的界面文案翻译为简体中文。当前版本：**0.2.0**。
 
-## 安装
+## 安装与更新
 
-1. 打开 Chrome：`chrome://extensions/`
-2. 开启右上角“开发者模式”
-3. 点击“加载已解压的扩展程序”
-4. 选择本文件夹：`lfm-chinese-extension`
-5. 打开或刷新 `https://lowfuelmotorsport.com/`
+1. 下载或克隆本仓库。
+2. 打开 Chrome 的 `chrome://extensions/`，开启“开发者模式”。
+3. 点击“加载已解压的扩展程序”，选择本仓库根目录 `lfm-cn`，其中应包含 `manifest.json`。
+4. 打开或刷新 LFM 网站；将“LFM 中文汉化”固定到工具栏方便切换。
 
-## 说明
+更新文件后，在扩展管理页面点击此扩展的刷新按钮，再刷新已经打开的 LFM 页面。运行扩展不需要安装 Node.js 或执行构建命令。
 
-- 站点语言包位于 `/_nuxt/DWX8L_Sb.js`，当前是 Nuxt 插件 chunk，内含 `en/de/es` 三套消息。
-- 这个版本使用内容脚本做前端文本替换，并把站点基础语言设为 `en`，这样汉化词典能稳定命中英文源文案。
-- 当前词典优先覆盖导航、账号资料、许可、安全分、热圈、BOP、报告和报名等常用区域。
-- 若 LFM 更新页面文案，只需要继续补充 `content.js` 里的 `exact` 映射。
+## 使用
 
-## 已抓到的语言包
+点击工具栏图标，切换“启用中文汉化”。默认开启；设置保存在 `chrome.storage.local`，应用到已打开的 LFM 页面，并在下次访问时保留。
 
-原始语言包入口：
+关闭后恢复当前页面原文、由扩展修改的语言标记及此前的基础语言偏好。汉化切换本身无需刷新。启用期间网站基础语言使用英语；如果之前使用德语、西班牙语等，网站可能需要刷新才应用新的基础语言。弹窗会提供刷新提示和按钮。停用后恢复其他基础语言也可能需要刷新。扩展不会触发网站内部的语言菜单。
 
-```text
-https://lowfuelmotorsport.com/_nuxt/DWX8L_Sb.js
-```
+扩展只修改文本与 `title`、`aria-label`、`placeholder`、`alt` 等显示属性。表单数据值、链接、用户输入、聊天正文、代码区、车手/车队名称和服务器凭据属于保护范围。保护依赖元素标签和选择器；真实账号字段、赛事凭据容器及排行榜姓名列另按标签与表头识别。网站结构变化后仍需核对新页面。原生下拉选项的显示文字可以翻译，其提交值保持原样；没有显式 `value` 的选项会在启用期间临时固定原始提交值，停用后移除该临时属性。
 
-抓取日期：2026-07-06
+英语源文案和词典均在本地处理，不调用云端翻译服务。权限为 `storage`（保存开关）和 `activeTab`（点击图标后识别、同步或刷新当前 LFM 页面）。
 
-## 添加翻译词典
+## 词典维护
 
-词典可以分文件保存。`manifest.json` 会先加载 `translations/common.js`，再加载 `content.js`，所以你可以在 `translations/common.js` 里追加翻译，也可以新建更多文件并放到 `content_scripts[0].js` 的 `content.js` 前面。
+`manifest.json` 决定加载顺序：`translations/common.js` 初始化公共词典，后续词典模块追加条目，最后运行 `content.js`。`translations/legacy-routes.js` 保存从历史脚本迁移的遗漏页面词条。新增词典文件必须放在初始化文件之后、`content.js` 之前。
 
-支持三类翻译：
+保留以下格式：
 
 ```js
 Object.assign(window.LFM_CN_TRANSLATIONS.exact, {
@@ -45,6 +39,46 @@ Object.assign(window.LFM_CN_TRANSLATIONS.partial, {
 window.LFM_CN_TRANSLATIONS.patterns.push(
   [/^Race #(\d+)$/, "比赛 #$1"]
 );
+
+window.LFM_CN_TRANSLATIONS.scoped.push({
+  routes: ["/racing/official"],
+  exact: { "Quick Signup": "快速报名" }
+});
+
+window.LFM_CN_TRANSLATIONS.selectorScoped.push({
+  selector: ".track-overlay",
+  exact: { "Serverstart:": "服务器启动：" }
+});
 ```
 
-从 `lfm-cn-dom.js` 迁移时，可以把 `exactGlobal` 放进 `exact`，把 `partialGlobal` 放进 `partial`，把 `regexRules` 放进 `patterns`。
+规则优先级为**选择器范围 → 路由范围 → 全局范围**，每个范围依次检查完整词条、正则、局部替换。同一级范围后注册的规则优先；同一个全局词条后加载的值覆盖先加载的值。完整词条先精确匹配，再忽略大小写；内部空白归一化，首尾空白保留。正则只使用第一条匹配规则；局部替换按源词条长度降序应用，区分大小写，避免短赛道名先破坏长名称。
+
+路由支持字符串、字符串数组、正则或函数；字符串按完整路径/子路径匹配，避免 `/account` 命中 `/accountant`。特殊页面内容优先使用路由或选择器范围，避免人名、车名等通用词误命中。需要保护新区域时可扩展 `content.js` 中的保护选择器，或在扩展脚本中设置 `window.LFM_CN_SKIP_SELECTORS`。网站自己的脚本处于不同执行环境，不能通过该变量直接配置扩展。
+
+引擎缓存原文和上次译文；网站更新文本时采用新的源文案。DOM 更新合并为 40ms 批次，批量处理期间暂停观察自身写入；删除节点的记录及时释放。路由变化通过历史导航事件与 250ms 地址检查捕获，兼容 Chrome 内容脚本隔离环境中的 `pushState`。
+
+`lfm-cn-dom.js` 是历史油猴脚本，仅供迁移参考，已停止同步维护；它不在扩展加载清单中。避免同时启用旧脚本和扩展。无需依赖或修改任何固定 Nuxt chunk。
+
+## 本地检查
+
+需要 Node.js 20 或更新版本：
+
+```bash
+npm ci
+npm run check
+npm test
+```
+
+`check` 验证脚本语法、重复对象键、词典格式、选择器及 Manifest 加载完整性。测试使用 Node 测试运行器和 jsdom，覆盖翻译优先级、空白/日期/动态参数、路由切换、原文恢复、表单保护、下拉选项、批量 DOM 更新、语言偏好以及工具栏弹窗行为。
+
+这些检查验证本地行为，不能替代真实 Chrome 中的扩展集成、页面布局及登录流程验收。当前实测状态和复核步骤见 [验收记录](docs/verification.md)。
+
+## 排错
+
+- **没有汉化**：确认使用匹配的 HTTPS 域名、开关已启用，并在安装/更新后刷新页面。检查扩展管理页是否有脚本错误。
+- **仍显示德文/西班牙文**：按弹窗提示刷新，让网站使用英语源文案。
+- **某处漏译**：记录路径、原始界面文本及元素结构，补充相应词典；不要把私人聊天或用户名称加入全局词典。
+- **误译或操作异常**：先关闭汉化恢复原文，检查词条和保护选择器，并添加针对该场景的回归测试。
+- **首次开关提示无法加载**：已打开的旧页面可能没有内容脚本；使用弹窗的刷新按钮。
+
+许可证：[MIT](LICENSE)。

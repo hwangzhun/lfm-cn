@@ -11,6 +11,13 @@
 
   Object.assign(window.LFM_CN_TRANSLATIONS.exact, {
     'Joined:': '加入时间：',
+    'AVATAR': '头像',
+    'PREVIOUS «': '上一页 «',
+    '» NEXT': '» 下一页',
+    'MOST ACTIVE DRIVERS': '最活跃车手',
+    'LAPTIME BY ELO RANGE': '按 ELO 区间查看圈速',
+    'USER DEVELOPEMENT': '用户增长',
+    'USER DEVELOPMENT': '用户增长',
     'STATISTICS': '统计数据',
     'Season / Series': '赛季/系列',
     'SEASONS RACES': '赛季比赛',
@@ -37,24 +44,17 @@
 
   });
 
-  Object.assign(window.LFM_CN_TRANSLATIONS.partial, {
-
-  });
-
   window.LFM_CN_TRANSLATIONS.selectorScoped = window.LFM_CN_TRANSLATIONS.selectorScoped || [];
 
-  window.LFM_CN_TRANSLATIONS.selectorScoped.push({
-    selectors: ["#"],
-    exact: {
-
-    },
-    partial: {
-
-    },
-    patterns: [
-
-    ]
+  window.LFM_CN_TRANSLATIONS.scoped = window.LFM_CN_TRANSLATIONS.scoped || [];
+  window.LFM_CN_TRANSLATIONS.scoped.push({
+    route: "/statistics",
+    exact: { NAME: "姓名" }
   });
+
+  window.LFM_CN_TRANSLATIONS.patterns.push(
+    [/^YOUR POSITION: (\d+)$/i, "你的排名：$1"]
+  );
 
   window.LFM_CN_TRANSLATIONS.patterns.push([
     /^(MON|TUE|WED|THU|FRI|SAT|SUN),\s*(\d{1,2})\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+(\d{4}),\s*(\d{1,2}:\d{2})$/i,

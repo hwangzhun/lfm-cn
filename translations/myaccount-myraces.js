@@ -18,6 +18,16 @@
     "3-Letter Shortname:": "三字母缩写：",
     "Origin:": "国家/地区：",
     "ACCOUNT IDS": "账户 ID",
+    "ACCOUNT ID'S": "账户 ID",
+    "SAVE ACCOUNT": "保存账户",
+    "Reporting window closed": "举报窗口已关闭",
+    "REDEEM CODE": "兑换代码",
+    "MY PENALTIES": "我的处罚",
+    "REPORT OUTCOMES": "举报处理结果",
+    "PENDING REPORTS": "待处理举报",
+    "CHANGE BANNER": "更换横幅",
+    "CHANGE IMAGE": "更换头像",
+    "Change profile picture": "更换头像",
     "Discord ID:": "Discord ID：",
     "Patreon ID:": "Patreon ID：",
     "iRacing Customer ID:": "iRacing 客户 ID：",
@@ -39,6 +49,8 @@
     "GIFT A MEMBERSHIP!": "赠送会员！",
     "LFM DRIVER LICENSE STREAMING WIDGETS": "LFM 驾照直播组件",
     "Get your LFM License for your stream! Copy the URL and add it as an OBS Browser Source.": "为您的直播获取 LFM 驾照！复制 URL 并将其添加为 OBS 浏览器源。",
+    "Get your LFM License for your stream! Copy the URL and add it as an": "为您的直播获取 LFM 驾照！复制 URL 并将其添加为",
+    "OBS Browser Source": "OBS 浏览器源",
     "Big Card": "大卡片",
     "Small Card": "小卡片",
     "COPY URL": "复制 URL",
@@ -75,12 +87,11 @@
     "Send report": "发送报告",
 
     // 举报类别
-    "Causing a collision": "引发碰撞",
+
     "Causing a collision": "引发碰撞",
     "Causing a masscrash (min. 4 cars)": "引发大规模碰撞（至少4辆车）",
     "Forcing another car off track": "将另一辆车逼出赛道",
 
-    "Causing a collision in Lap 1": "在第1圈引发碰撞",
     "Causing a collision in Lap 1": "在第1圈引发碰撞",
     "Causing a masscrash in Lap 1 (min. 4 cars)": "在第1圈引发大规模碰撞（至少4辆车）",
     "Forcing another car off track in lap 1": "在第1圈将另一辆车逼出赛道",
@@ -120,22 +131,4 @@
 
   window.LFM_CN_TRANSLATIONS.selectorScoped = window.LFM_CN_TRANSLATIONS.selectorScoped || [];
 
-  window.LFM_CN_TRANSLATIONS.selectorScoped.push({
-    selectors: ["#"],
-    exact: {
-
-    },
-    partial: {
-
-    },
-    patterns: [
-
-    ]
-  });
-
-
-
-  window.LFM_CN_TRANSLATIONS.patterns.push(
-
-  );
 })();

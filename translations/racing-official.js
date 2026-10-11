@@ -18,6 +18,10 @@
     "Tileview": "卡片视图",
     "Tableview": "表格视图",
     "Quick Signup": "快速报名",
+    "Ginetta CUP": "Ginetta 杯",
+    "GT2 CUP": "GT2 杯",
+    "Porsche CUP": "保时捷杯",
+    "Touring Cup": "房车杯",
     "DAILY": "每日",
     "WEEKLY": "每周",
     "SPECIAL EVENTS": "特别赛事",
@@ -53,8 +57,6 @@
     "*will be raffled": "*将进行抽奖",
 
     // GT3 + GT4 多组别
-    "GT3 + GT4 MULTICLASS": "GT3 + GT4 多组别",
-    "Do you thrive in traffic, strategy, and clean multiclass racing? Then this GT3 + GT4 Multiclass is made for you. Choose your class, master traffic management and race strategy in thrilling 60-minute races, and prove yourself in the battle between two worlds on the same track.": "你是否在交通流、策略和干净的多组别比赛中游刃有余？那么这款 GT3 + GT4 多组别赛事正是为你而设。选择你的组别，在激动人心的 60 分钟比赛中掌握交通管理和比赛策略，在同一条赛道上于两个世界的较量中证明自己。",
 
     // GT3 + GT4 多组别 - 官网赛季
     "GT3 + GT4 MULTICLASS": "GT3 + GT4 多组别",
@@ -66,7 +68,6 @@
     "ACC TEAM EVENT GUIDE !!MANDATORY TO READ!!": "ACC 车队赛事指南！！必须阅读！！",
 
     // LMF-GTC
-    "With the all new LFM GTC, you can experience five unique GT3 endurance races across the globe. Face legendary tracks, manage strategy and consistency over the distance, and battle your rivals in a true test of endurance racing.": "通过全新的 LFM GTC，您可以体验全球五场独特的 GT3 耐力赛。挑战传奇赛道，管理长距离比赛中的策略与稳定性，在真正的耐力赛考验中与对手一较高下。",
 
     // 纽博格林北环冲刺
     "Nordschleife Sprint Cup": "纽博格林北环冲刺杯",
@@ -86,7 +87,12 @@
     "Less power and aero than a GT3, but just as much racing fun – that’s what the GT4, M2 Cup, and Porsche Cup delivers. For 25 minutes, without pit stops, you can prove your precision and control by mastering these smaller machines around the track.": "比 GT3 更低的动力和空气动力学，但同样充满赛车乐趣——这就是 GT4、M2 Cup 和 Porsche Cup 带来的体验。在 25 分钟无进站的比赛中，你可以通过驾驭这些小型赛车在赛道上证明你的精准度和操控力。",
 
     // 比赛卡片
-    "Sessions": "比赛",
+    "Sessions": "比赛环节",
+    "NO SESSIONS FOUND": "未找到比赛场次",
+    "Start Times": "开始时间",
+    "Driver Stint Time": "车手单次驾驶时长",
+    "View mode switch": "切换视图",
+    "Server is hosted in Europe": "服务器位于欧洲",
 
     "Sign Up": "报名",
     "TEAM": "车队",
@@ -102,7 +108,7 @@
   });
 
   Object.assign(window.LFM_CN_TRANSLATIONS.partial, {
-    "OFF SEASON": "官方赛季",
+    "OFF SEASON": "休赛期",
 
   });
 
@@ -114,17 +120,30 @@
 
     },
     partial: {
-      "P": "练习",
-      "Q": "排位",
-      "R": "正赛",
+
       "min.": "分钟",
       "Start Times": "时间",
     },
     patterns: [
+      [/\b([PQR])\b|\bmin\.|Start Times|Sessions/g, function (token, session) {
+        if (session) return { P: "练习", Q: "排位", R: "正赛" }[session];
+        return { "min.": "分钟", "Start Times": "开始时间", Sessions: "比赛环节" }[token];
+      }],
       [/^(\d+)\s*MIN\.?$/i, "$1 分钟"],
       [/^(\d+)\s*LAPS?$/i, "$1 圈"]
     ]
   });
+
+  window.LFM_CN_TRANSLATIONS.patterns.push(
+    [/^SEASON (\d+) \| WEEK (\d+)$/i, "第 $1 赛季 | 第 $2 周"],
+    [/^SR License ([A-Z0-9+]+) required$/i, "需要 SR 驾照 $1"],
+    [/^License ([A-Z0-9+]+) required$/i, "需要驾照 $1"],
+    [/^Driver Stint Time: (\d+) min\.?$/i, "车手单次驾驶时长：$1 分钟"],
+    [/^(\d+) min\.$/i, "$1 分钟"],
+    [/^(Temperature|Clouds|Rain|Randomness): (.+)$/i, function (_, label, value) {
+      return { temperature: "温度", clouds: "云量", rain: "降雨", randomness: "随机变化" }[label.toLowerCase()] + "：" + value;
+    }]
+  );
 
   const dateDays = {
     MON: "周一",

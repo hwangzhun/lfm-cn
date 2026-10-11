@@ -8,6 +8,8 @@
   };
 
   Object.assign(window.LFM_CN_TRANSLATIONS.exact, {
+    "AC TUTORIAL": "AC 教程",
+    "Code of Conduct": "行为准则",
     "Frequently Asked Questions": "常见问题",
     "General": "常规",
     "What's LFM?": "什么是 LFM？",

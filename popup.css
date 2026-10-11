@@ -1,0 +1,11 @@
+:root { color-scheme: light dark; font: 14px/1.6 system-ui, sans-serif; }
+body { margin: 0; width: 300px; }
+main { padding: 20px; }
+h1 { font-size: 19px; margin: 0 0 18px; }
+.setting { display: flex; justify-content: space-between; align-items: center; font-weight: 600; cursor: pointer; }
+input { width: 20px; height: 20px; accent-color: #d64b30; }
+p { margin: 12px 0; }
+.note { opacity: .7; font-size: 12px; }
+button { font: inherit; padding: 8px 12px; width: 100%; cursor: pointer; border-radius: 6px; border: 1px solid #888; }
+button:focus-visible, input:focus-visible { outline: 2px solid #d64b30; outline-offset: 3px; }
+[hidden] { display: none !important; }

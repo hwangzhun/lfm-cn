@@ -1,0 +1,13 @@
+{
+  "name": "lfm-cn",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "check": "node scripts/check.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0",
+    "acorn": "^8.15.0"
+  }
+}

@@ -16,7 +16,4 @@
 "DLC CONTENT": "DLC 内容"
   });
 
-  Object.assign(window.LFM_CN_TRANSLATIONS.partial, {
-    
-  });
 })();
